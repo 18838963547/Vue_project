@@ -5,15 +5,22 @@ import Vue from "vue";
 import './lib/mui/css/mui.css';
 import './lib/mui/css/icons-extra.css';
 import VueResource from 'vue-resource';
-
+import moment from "moment";
 // 按需导入mint-ui中的组件
-import { Header ,Swipe, SwipeItem} from 'mint-ui';
+import { Header ,Swipe, SwipeItem,Button} from 'mint-ui';
 Vue.component(Header.name,Header);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Button.name, Button);
 
 
 Vue.use(VueResource);
+Vue.http.options.root = 'http://vue.studyit.io';
+
+// 全局日期格式化
+Vue.filter('dataF',function(info, option = 'YYYY-MM-DD HH:mm:ss'){
+  return moment(info).format(option);
+})
 
 // 导入app模板组件
 import app from './App.vue'

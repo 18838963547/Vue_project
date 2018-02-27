@@ -2,10 +2,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import home from './components/Home.vue'
-import user from './components/User.vue'
-import shopcar from './components/Shopcar.vue'
-import search from './components/Search.vue'
+import home from './components/tabber/Home.vue'
+import user from './components/tabber/User.vue'
+import shopcar from './components/tabber/Shopcar.vue'
+import search from './components/tabber/Search.vue'
+import newslist from './components/news/newList.vue'
+import newsinfo from './components/news/newinfo.vue'
 
 Vue.use(VueRouter)
 
@@ -16,7 +18,11 @@ var router = new VueRouter({
   	{path:'/home',component:home},
   	{path:'/user',component:user},
   	{path:'/shopcar',component:shopcar},
-  	{path:'/search',component:search}
+  	{path:'/search',component:search},
+  	{path:'/newslist',component:newslist},
+  	{path:'/newsinfo/:id',component:newsinfo},
+
+
   ],
   linkActiveClass:'mui-active'
 })
