@@ -3,8 +3,8 @@
 		<div class="common">
 			<h3>发表评论</h3>
 			<hr>
-			<textarea placeholder="请输入内容(不多于100个字)"></textarea>
-			<mt-button type="primary" size="large">发表评论</mt-button>
+			<textarea placeholder="请输入内容(不多于100个字)" v-model="textvalue"></textarea>
+			<mt-button type="primary" size="large" @click="posted">发表评论</mt-button>
 			<div class="container">
 				<div class="container-box" v-for="(item,i) in commentlist" :key='item.add_time'>
 					<div class="container-title">
@@ -25,7 +25,8 @@ export default {
 	data(){
 		return{
 			commentlist:[],
-			pageIndex:1
+			pageIndex:1,
+			textvalue:null
 		}
 	},
 	props: ["id"],
@@ -45,6 +46,19 @@ export default {
 		addmore(){
 			this.pageIndex++;
 			this.getCommentData();
+		},
+		posted(){
+			if(this.textvalue.trim().length === 0){
+				return Toast('请输入内容')
+			}
+			this.$http.post("api/postcomment/"+this.$route.params.id,{content:this.textvalue}).then(res=>{
+				this.commentlist.unshift({
+					content:this.textvalue,
+            		user_name:'匿名用户',
+            		add_time:new Date()
+				})
+				this.textvalue = null;
+			})
 		}
 	}
 }
