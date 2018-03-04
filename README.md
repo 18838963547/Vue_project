@@ -1,2 +1,2 @@
-# secondProject
-## 黑马vue项目
+# 项目详情
+
